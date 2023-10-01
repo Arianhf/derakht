@@ -1,0 +1,72 @@
+# Python-related files and directories
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+*.log
+
+# Virtual environment
+venv/
+env/
+env_bak/
+
+# Wagtail-specific files and directories
+/media/
+/static/
+/site_media/
+/db.sqlite3
+/local_settings.py
+*.bak
+*.swp
+*.swo
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# PyCharm-related files
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Compiled files
+*.pyc
+*.pyo
+
+# Logs and backups
+*.log
+*.bak
+*.swp
+*.swo
+*.orig
+
+# Ignore local settings
+/local_settings.py
+
+# Ignore database
+/db.sqlite3
+
+# Ignore environment variables file
+.env
+
+# Ignore system files
+.vscode/
+
+# Ignore compiled Python files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore Python egg
+*.egg-info/
+dist/
+build/
+eggs/
+*.egg
+
+# Ignore Jupyter Notebook checkpoints
+.ipynb_checkpoints/
