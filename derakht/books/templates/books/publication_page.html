@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-4">
+                {% if page.logo %}
+                    {% image page.logo original %}
+                {% else %}
+                    <p>No logo available</p>
+                {% endif %}
+            </div>
+            <div class="column is-8">
+                <h1 class="title">{{ page.name }}</h1>
+                <p>{{ page.description | richtext }}</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h2 class="title">کتاب‌های  {{ page.title }}</h2>
+        <div class="columns is-multiline">
+            {% for book in page.books.all %}
+                <div class="column is-3">
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class="image is-3by4">
+                                {% if book.cover_image %}
+                                  {% image book.cover_image original %}
+                                {% else %}
+                                    <p>No cover image available</p>
+                                {% endif %}
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="content">
+                                <p class="title is-6">{{ book.title }}</p>
+                                <a href='{% pageurl book.author %}' class="subtitle is-7">{{ book.author }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load wagtailimages_tags %}
+
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-8">
+                <h1 class="title">{{ page.name }}</h1>
+                <h2 class="subtitle">{{ page.en_name }}</h2>
+                <p>{{ page.short_description }}</p>
+            </div>
+            <div class="column is-4">
+                {% if page.image %}
+                    {% image page.image original %}
+                {% else %}
+                    <p>No image available</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h2 class="title">Books by {{ page.name }}</h2>
+        <div class="columns is-multiline">
+            {% for book in page.books.all %}
+                <div class="column is-3">
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class="image is-3by4">
+                                {% if book.cover_image %}
+                                    <img src="{{ book.cover_image.url }}" alt="{{ book.title }}">
+                                {% else %}
+                                    <p>No cover image available</p>
+                                {% endif %}
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="content">
+                                <p class="title is-6">{{ book.title }}</p>
+                                <p class="subtitle is-7">{{ book.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

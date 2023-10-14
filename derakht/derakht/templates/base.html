@@ -1,7 +1,7 @@
 {% load static wagtailcore_tags wagtailuserbar %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="rtl">
     <head>
         <meta charset="utf-8" />
         <title>
@@ -23,6 +23,8 @@
         <base target="_blank">
         {% endif %}
 
+        <!-- Include Bulma CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma-rtl.min.css">
         {# Global stylesheets #}
         <link rel="stylesheet" type="text/css" href="{% static 'css/derakht.css' %}">
 
@@ -33,7 +35,34 @@
 
     <body class="{% block body_class %}{% endblock %}">
         {% wagtailuserbar %}
+        <!-- Navigation Bar -->
+        <nav class="navbar" role="navigation" aria-label="main navigation">
+            <div class="container">
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="/">My Book Website</a>
+                    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                        <span aria-hidden="true"></span>
+                    </a>
+                </div>
 
+                <div id="navbarBasicExample" class="navbar-menu">
+                    <div class="navbar-end">
+                        <!-- Add your navigation links here -->
+                        <a class="navbar-item" href="/">Home</a>
+                        <a class="navbar-item" href="/about/">About</a>
+                        <div class="navbar-item has-dropdown is-hoverable">
+                            <a class="navbar-link">Genres</a>
+                            <div class="navbar-dropdown">
+                                <a class="navbar-item" href="/genre/mystery/">Mystery</a>
+                                <a class="navbar-item" href="/genre/scifi/">Science Fiction</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
         {% block content %}{% endblock %}
 
         {# Global javascript #}
@@ -44,3 +73,5 @@
         {% endblock %}
     </body>
 </html>
+
+

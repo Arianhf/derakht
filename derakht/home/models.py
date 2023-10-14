@@ -7,13 +7,13 @@ from wagtail.fields import RichTextField
 
 from wagtail.models import Page
 
-from books.models import Book
+from books.models import BookPage
 
 
 class HomePage(Page):
     body = RichTextField(blank=True)
-    featured_books = ParentalManyToManyField(Book, blank=True)
-    genre= PageChooserBlock(required=False)
+    featured_books = ParentalManyToManyField(BookPage, blank=True)
+    genre = PageChooserBlock(required=False)
 
     content_panels = Page.content_panels + [
         FieldPanel('body', classname="full"),
@@ -23,3 +23,5 @@ class HomePage(Page):
 
     def __str__(self):
         return self.title
+
+    max_count = 1

@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load wagtailimages_tags %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-8">
+                <h1 class="title">Books</h1>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="columns is-multiline column is-10">
+            {% for book in page.get_children.specific %}
+                <div class="column is-3">
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class="image is-3by4">
+                                {% if book.cover_image %}
+                                    {% image book.cover_image original class="image" %}
+                                {% else %}
+                                    <p>No cover image available</p>
+                                {% endif %}
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="content">
+                                <p class="title is-6">{{ book.title }}</p>
+                                <a href='{% pageurl book.author %}' class="subtitle is-7">{{ book.author }}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+            <div class="column is-2">
+                <div class="columns is-multiline is-mobile">
+                    <div class="column is-12">
+                        <form action="" method="get">
+                            <div class="field">
+                                <label for="genre" class="label">فیلتر بر اساس موضوع</label>
+                                <div class="control">
+                                    <div class="select">
+                                        <select name="genre" id="genre">
+                                            <option value="">همه موضوع‌ها</option>
+                                            {% for genre in genres %}
+                                                <option value="{{ genre.slug }}">{{ genre.title }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="control">
+                                    <button type="submit" class="button is-primary is-fullwidth">Apply</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+

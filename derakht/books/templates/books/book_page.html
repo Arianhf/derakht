@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+{% load wagtailimages_tags %}
+
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-4">
+                {% if self.cover_image %}
+                    {% image self.cover_image original class="image" %}
+                {% else %}
+                    <p>No cover image available</p>
+                {% endif %}
+            </div>
+            <div class="column is-8">
+                <h1 class="title">{{ self.title }}</h1>
+                <p class="subtitle">by {{ self.author }}</p>
+                <p>{{ self.description | richtext }}</p>
+                <p><strong>مترجم:</strong> {{ self.translator }}</p>
+                <p><strong>ناشر:</strong><a href={% pageurl self.publication %}> {{ self.publication }}</a></p>
+                <div class="tags">
+                    {% for genre in self.genres.all %}
+                        <span class="tag">{{ genre.title }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

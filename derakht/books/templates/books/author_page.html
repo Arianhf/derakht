@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% load wagtailimages_tags %}
+{% load wagtailcore_tags %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column is-8">
+                <h1 class="title">{{ page.name }}</h1>
+                <h2 class="subtitle">{{ page.en_name }}</h2>
+                <p>{{ page.short_description }}</p>
+            </div>
+            <div class="column is-4">
+                <figure class="image">
+                    {% if page.image %}
+                        {% image page.image original class="is-rounded" %}
+                    {% else %}
+                        <p>No image available</p>
+                    {% endif %}
+                </figure>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <h2 class="title">Books by {{ page.name }}</h2>
+        <div class="columns is-multiline">
+            {% for book in page.books.all %}
+                <div class="column is-3">
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class="image is-3by4">
+                                {% if book.cover_image %}
+                                    {% image book.cover_image original class="image" %}
+                                {% else %}
+                                    <p>No cover image available</p>
+                                {% endif %}
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="content">
+                                <p class="title is-6">{{ book.title }}</p>
+                                <p class="subtitle is-7">{{ book.description | richtext }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% if page.trasnlations.all %}
+<section class="section">
+    <div class="container">
+        <h2 class="title">Books Translated by {{ page.name }}</h2>
+        <div class="columns is-multiline">
+            {% for translation in page.translations.all %}
+                <div class="column is-3">
+                    <div class="card">
+                        <div class="card-image">
+                            <figure class="image is-3by4">
+                                {% if translation.cover_image %}
+                                    <img src="{{ translation.cover_image.url }}" alt="{{ translation.title }}">
+                                {% else %}
+                                    <p>No cover image available</p>
+                                {% endif %}
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="content">
+                                <p class="title is-6">{{ translation.title }}</p>
+                                <p class="subtitle is-7">{{ translation.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endif %}
+{% endblock %}
